@@ -1,7 +1,7 @@
 import teclado from './dataImg/teclado.jpg'
 
 const products = [{
-    id: 1,
+    id: 0,
     name: "keyboard 1",
     stock: 20,
     price: "59,99",
@@ -10,7 +10,7 @@ const products = [{
 },
 
 {
-    id: 2,
+    id: 1,
     name: "keyboard 2",
     stock: 30,
     price: "69,99",
@@ -19,7 +19,7 @@ const products = [{
 },
 
 {
-    id: 3,
+    id: 2,
     name: "keyboard 3",
     stock: 40,
     price: "49,99",
@@ -28,7 +28,7 @@ const products = [{
 },
 
 {
-    id: 4,
+    id: 3,
     name: "keyboard 4",
     stock: 0,
     price: "79,99",
