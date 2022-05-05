@@ -2,24 +2,25 @@ import React, { useEffect, useState } from 'react';
 import ItemList from '../ItemList/ItemList';
 import {getMock} from '../../data/products';
 import { CircularProgress } from '@mui/material';
+import { useParams } from 'react-router-dom';
 
 
-const ItemListContainer = ( { greeting } ) => {
+const ItemListContainer = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true)
+    const {categoryid} = useParams();
 
     useEffect( () => {
         getMock
             .then(respuestaPromise => {
-                setProducts(respuestaPromise);
+                setProducts(respuestaPromise.filter( (item) => categoryid ? item.category === categoryid : item) );
             })
             .catch( (error) => console.log(error) )
             .finally( () => setLoading(false))
-    }, []);
+    }, [categoryid]);
 
     return (
         <div style={{textAlign: "center"}}>
-        <h1>{greeting}</h1>
         {loading ? <CircularProgress color="secondary"/> : <ItemList products={products}/>}
     </div>
     )

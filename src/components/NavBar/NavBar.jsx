@@ -8,11 +8,11 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Logo from '../../assets/Sushi-Switch.png';
 import CartWidget from '../CartWidget/CartWidget';
+import { Link } from 'react-router-dom'
 
 const pages = ['Categories', 'Products', 'Contact'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -40,17 +40,17 @@ const NavBar = () => {
     <AppBar position="static" sx={{backgroundColor:'pink'}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
+        <Link to="/" style={{ display: 'flex', alignItems: 'center', color: 'white', textDecoration: 'none' }} >
             <img src={Logo} alt='Logo' style={{width:'5%', borderRadius:'150px', margin:'8px'}}/>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
-          >
-            
-            Sushi Switch
-          </Typography>
-
+            <Typography
+              variant="h5"
+              noWrap
+              component="div"
+              sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+            >
+              Sushi Switch
+            </Typography>
+          </Link>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -96,15 +96,21 @@ const NavBar = () => {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
+          <Link style={{ textDecoration: 'none'}} to='/product' >
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography  color="white" textAlign="center">Products</Typography>
+                </MenuItem>
+            </Link>
+            <Link style={{ textDecoration: 'none'}} to='/category/Peripheral' >
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography  color="white" textAlign="center">Peripherals</Typography>
+                </MenuItem>
+            </Link>
+            <Link style={{ textDecoration: 'none'}} to='/category/Switch' >
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography color="white" textAlign="center">Switch</Typography>
+                </MenuItem>
+            </Link>
           </Box>
             <CartWidget />
           
