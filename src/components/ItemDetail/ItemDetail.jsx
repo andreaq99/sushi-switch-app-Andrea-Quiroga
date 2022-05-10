@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ItemCount from "../ItemCount/ItemCount";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -7,7 +7,11 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 
 const ItemDetail = ({ item }) => {
+
+    const [amount, setAmount] = useState(0);
     const { stock, name, price, description, img } = item;
+    console.log(amount);
+
     return (
         <Card sx={{ width: '1200px', margin: { xs: '0 auto' }, height: "750px", backgroundColor: "rgb(219, 211, 211)" }}>
             <CardActionArea>
@@ -32,7 +36,7 @@ const ItemDetail = ({ item }) => {
                     </Typography>
                 </CardContent>
             </CardActionArea>
-            <ItemCount stock={stock} initial={stock === 0 ? 0 : 1} />
+            <ItemCount onAdd={(count) => setAmount(count)} stock={stock} initial={stock === 0 ? 0 : 1} />
         </Card>
     );
 }

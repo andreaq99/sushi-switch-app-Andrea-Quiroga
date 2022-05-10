@@ -112,7 +112,9 @@ const NavBar = () => {
                 </MenuItem>
             </Link>
           </Box>
+          <Link to='/cart'>
             <CartWidget />
+          </Link>
           
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">

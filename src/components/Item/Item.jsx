@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ItemCount from "../ItemCount/ItemCount";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -8,7 +8,10 @@ import { CardActionArea } from '@mui/material';
 import { Link } from 'react-router-dom'
 
 const Item = ({ product }) => {
+    const [amount, setAmount] = useState(0);
     const { stock, name, price, description, img } = product;
+
+    console.log(amount);
     return (
         <Card sx={{ width: 350, margin: { xs: '0 auto' }, height: "400px", backgroundColor: "rgb(219, 211, 211)" }}>
             <Link style={{ textDecoration: 'none', color: 'black'}} to={`/product/${product.id}`}>
@@ -35,7 +38,7 @@ const Item = ({ product }) => {
                 </CardContent>
             </CardActionArea>
             </Link>
-            <ItemCount stock={stock} initial={stock === 0 ? 0 : 1} />
+            <ItemCount onAdd={ (count) => setAmount(count)} stock={stock} initial={stock === 0 ? 0 : 1} />
             
         </Card>
     );
