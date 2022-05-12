@@ -2,11 +2,13 @@
 import { Button } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useCartContext from "../store/CartContext";
 
 const ItemCount = (props) => {
 
     const [count, setCount] = useState(props.initial)
     const navigate = useNavigate();
+    const { addToCart } = useCartContext();
 
     function handleAdd() {
         if (count < props.stock) {
@@ -24,10 +26,11 @@ const ItemCount = (props) => {
 
         if (props.stock !== 0) {
             alert("Added to cart " + count + " item");
-            props.onAdd(count);
-            navigate('/cart');
+            addToCart( props.item, count );
         }
     }
+    console.log("agregado al cartr", props.item, count);
+   
 
     return (
         <>

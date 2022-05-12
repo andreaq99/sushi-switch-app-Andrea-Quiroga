@@ -5,9 +5,11 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
+import useCartContext from "../store/CartContext";
 
 const ItemDetail = ({ item }) => {
 
+    const { addToCart } = useCartContext();
     const [amount, setAmount] = useState(0);
     const { stock, name, price, description, img } = item;
     console.log(amount);
@@ -36,7 +38,7 @@ const ItemDetail = ({ item }) => {
                     </Typography>
                 </CardContent>
             </CardActionArea>
-            <ItemCount onAdd={(count) => setAmount(count)} stock={stock} initial={stock === 0 ? 0 : 1} />
+            <ItemCount item={item} onAdd={(count) => setAmount(count)} stock={stock} initial={stock === 0 ? 0 : 1} />
         </Card>
     );
 }
