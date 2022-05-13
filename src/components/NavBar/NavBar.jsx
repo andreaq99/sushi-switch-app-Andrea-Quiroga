@@ -13,15 +13,12 @@ import MenuItem from '@mui/material/MenuItem';
 import Logo from '../../assets/Sushi-Switch.png';
 import CartWidget from '../CartWidget/CartWidget';
 import { Link } from 'react-router-dom'
-import useCartContext  from '../store/CartContext';
 
 const pages = ['Categories', 'Products', 'Contact'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const NavBar = () => {
 
-  const { contextFunction } = useCartContext();
-  contextFunction();
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);

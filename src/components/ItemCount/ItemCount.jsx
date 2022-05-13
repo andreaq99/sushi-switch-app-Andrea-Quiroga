@@ -1,52 +1,67 @@
+import React, { useEffect, useState } from 'react';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 
-import { Button } from "@mui/material";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import useCartContext from "../store/CartContext";
 
-const ItemCount = (props) => {
+//import styles
+import './ItemCount.css'
 
-    const [count, setCount] = useState(props.initial)
-    const navigate = useNavigate();
-    const { addToCart } = useCartContext();
+const ItemCount = (prop) => {
 
-    function handleAdd() {
-        if (count < props.stock) {
-            setCount(count + 1);
+    const [counter, setCounter] = useState(prop.initial);
+
+
+    useEffect(() => {
+
+        setCounter(prop.initial);
+
+    }, [prop.idParam, prop.initial])
+
+    const add = () => {
+        setCounter(counter + 1);
+    }
+
+    const remove = () => {
+        setCounter(counter - 1);
+    }
+
+    const stylesCounter = {
+        border: '1px solid black',
+        color: 'black',
+        "&:hover": {
+            opacity: 0.8,
+            border: '1px solid black',
         }
     }
 
-    function handleSubstract() {
-        if (count > 1) {
-            setCount(count - 1);
+    //styles to customize material ui component
+    const stylesAddToCart = {
+        display: 'block',
+        margin: '0 auto',
+        width: '85%',
+        mt: 2, mb: 2,
+        border: '1px solid black',
+        color: 'black',
+        "&:hover": {
+            opacity: 0.8,
+            border: '1px solid black',
         }
     }
 
-    function handleAddToCart() {
-
-        if (props.stock !== 0) {
-            alert("Added to cart " + count + " item");
-            addToCart( props.item, count );
-        }
+    const handleOnAdd = () => {
+        prop.onAdd(counter)
     }
-    console.log("agregado al cartr", props.item, count);
-   
 
-    return (
-        <>
-            
-            <div>
-                <Button onClick={handleSubstract} variant="outlined" >-</Button>
-                <span style={{ margin: '10px' }}> {count} </span>
-                <Button onClick={handleAdd} variant="outlined">+</Button>
-            </div>
-            <div>
-                <Button onClick={handleAddToCart} variant="outlined" sx={{ mt: 2 }}>Add to cart</Button>
-            </div>
-        </>
-
-    )
-
+    return <>
+        <Stack sx={{ justifyContent: 'center', marginTop: '20px' }} direction="row" spacing={2}>
+            <Button onClick={remove} variant="outlined" sx={stylesCounter} disabled={(prop.stock === 0) || (counter === 0)}>-</Button>
+            <span className={prop.stock === 0 || counter === 0 ? 'noStock' : 'counter'}>{counter}</span>
+            <Button onClick={add} variant="outlined" sx={stylesCounter} disabled={(prop.stock === 0) || (counter >= prop.stock)}>+</Button>
+        </Stack>
+        <Button sx={stylesAddToCart} onClick={handleOnAdd} variant="outlined" disabled={prop.stock === 0 || (counter === 0)}>
+            Add to cart
+        </Button>
+    </>;
 };
 
 export default ItemCount;

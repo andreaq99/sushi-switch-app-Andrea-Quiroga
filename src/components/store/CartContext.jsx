@@ -1,50 +1,96 @@
 import { createContext, useState } from "react";
-import { useContext } from 'react';
 
-const CartContext = createContext();
-const useCartContext = () => useContext(CartContext);
+export const CartContext = createContext();
 
-const { Provider } = CartContext;
+export const CartProvider = ({ children }) => {
+  const [items, setItems] = useState([]);
+  //const [totalQuantity, setTotalQuantity] = useState(0);
+  //const [price, setPrice] = useState(0);
+  const [order, setOrder] = useState(null);
 
-export function CartContextProvider ({children}) {
+  const addToCart = (currentItem) => {
 
-    const [cart, setCart] = useState([]);
+    const index = isInCart(currentItem);
 
-    const addToCart = (item, cant) => {
-        if (isInCart()){
-            const newCart = cart.map(cartItem => {
-                if(cartItem.id === item.id){
-                   const copyItem = {...cartItem};
-                   copyItem.cant += cant;
-                   return copyItem;
-                }
-                else return cartItem; 
-            })
-            setCart(newCart);
-        }else{
-        const newItem = {...item, cant};
-        setCart([...cart, newItem]);
-    }}
+    if (index === -1) {
 
-    const removeFromCart = (id) => {
-        const newCart = [...cart];
-        const cartFilter = newCart.filter( item => {
-            return item.id !==id;
-        });
-        setCart(cartFilter);
+      setItems([...items, { currentItem }]);
+
+    } else {
+
+      let updateCard = [...items];
+
+      const { amount, stock } = updateCard[index].currentItem
+
+      if ((amount + currentItem.amount) <= stock) {
+
+        updateCard[index].currentItem.amount += currentItem.amount;
+
+      } else {
+        alert('Not enought stock')
+      }
+
+      setItems(updateCard);
+    }
+  };
+
+
+  const clear = () => {
+    setItems([])
+  }
+
+  const orderNumber = (id) => {
+    setOrder(id);
+  }
+
+  const isInCart = (itemNuevo) => {
+
+    const item = items.find(item => item.currentItem.id === itemNuevo.id);
+
+    return items.indexOf(item);
+  }
+
+  const removeItem = (item) => {
+
+    const index = isInCart(item)
+
+    items.splice(index, 1)
+
+    setItems([...items])
+  }
+
+
+ /* useEffect(() => {
+
+    let totalCant = 0;
+    let totalPrice = 0;
+    for (let i = 0; i < items.length; i++) {
+      let cant = items[i]?.currentItem.amount;
+      let price = items[i]?.currentItem.amount * items[i]?.currentItem.product.price;
+
+      totalPrice = totalPrice + price;
+      totalCant = totalCant + cant;
     }
 
-    const isInCart = () => {
-        return true;
-    }
+    setTotalQuantity(totalCant);
+    setPrice(totalPrice);
 
-    const contextFunction = () => console.log('contexto listo!')
+  }, [items])*/
 
-    return(
-        <Provider value={{ contextFunction, cart, addToCart, removeFromCart }}>
-            {children}
-        </Provider>
-    )
-}
+console.log(items)
+  return (
+    <CartContext.Provider
+      value={{
+        items,
+        addToCart,
+        clear,
+        removeItem,
+        orderNumber,
+        order
+      }}
+    >
+      {children}
+    </CartContext.Provider>
+  );
+};
 
-export default useCartContext;

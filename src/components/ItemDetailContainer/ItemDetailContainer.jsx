@@ -22,7 +22,7 @@ const ItemDetailContainer = () => {
     return (
         <div style={{textAlign: "center"}}>
             <h1>Item Detail Container</h1>
-            {loading ? <CircularProgress color="secondary"/> : <ItemDetail item={item}/>}
+            {loading ? <CircularProgress color="secondary"/> : <ItemDetail idParam={itemid} item={item}/>}
         </div>
     )
     

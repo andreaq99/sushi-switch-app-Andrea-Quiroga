@@ -1,0 +1,19 @@
+.counter{
+    align-self: center;
+    color: black;
+}
+
+.Mui-disabled{
+    border: 1px solid #d32f2f !important;
+    color: #d32f2f !important;
+}
+
+.Mui-active{
+    border: 1px solid black;
+    color: black;
+}
+
+.noStock{
+    align-self: center;
+    color: #d32f2f!important;
+}
