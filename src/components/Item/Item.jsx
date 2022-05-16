@@ -23,7 +23,7 @@ const Item = ({ product }) => {
                     alt={name}
                 />
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
+                    <Typography sx={{height:'30px', overflow:'hidden'}} gutterBottom variant="h5" component="div">
                         {name}
                     </Typography>
                     {stock !== 0 ?

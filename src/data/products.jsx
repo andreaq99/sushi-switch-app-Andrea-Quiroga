@@ -11,7 +11,7 @@ const products = [{
     id: 0,
     name: "Redragon FIZZ K617",
     stock: 20,
-    price: "59,99",
+    price: 59.99,
     description: "Product description",
     category: "Peripheral",
     img: teclado
@@ -21,7 +21,7 @@ const products = [{
     id: 1,
     name: "Akko 3084 World Tour Tokyo",
     stock: 30,
-    price: "69,99",
+    price: 69.99,
     description: "Product description",
     category: "Peripheral",
     img: Akko
@@ -31,7 +31,7 @@ const products = [{
     id: 2,
     name: "Womier k98",
     stock: 40,
-    price: "49,99",
+    price: 49.99,
     description: "Product description",
     category: "Peripheral",
     img: Womier
@@ -41,7 +41,7 @@ const products = [{
     id: 3,
     name: "TM680 Pink",
     stock: 0,
-    price: "79,99",
+    price: 79.99,
     description: "Product description",
     category: "Peripheral",
     img: Tm680
@@ -51,7 +51,7 @@ const products = [{
     id: 4,
     name: "Akko CS Jelly Pink Switch",
     stock: 100,
-    price: "5,99",
+    price: 5.99,
     description: "Product description",
     category: "Switch",
     img: AkkoSwitch
@@ -61,7 +61,7 @@ const products = [{
     id: 5,
     name: "Akko CS Jelly Blue Switch",
     stock: 100,
-    price: "5,99",
+    price: 5.99,
     description: "Product description",
     category: "Switch",
     img: BlueSwitch
@@ -71,7 +71,7 @@ const products = [{
     id: 6,
     name: "Akko CS Vintage White Switch",
     stock: 0,
-    price: "5,99",
+    price: 5.99,
     description: "Product description",
     category: "Switch",
     img: WhiteSwitch
@@ -81,7 +81,7 @@ const products = [{
     id: 7,
     name: "Akko CS Lavender Purple Switch",
     stock: 100,
-    price: "5,99",
+    price: 5.99,
     description: "Product description",
     category: "Switch",
     img: PurpleSwitch

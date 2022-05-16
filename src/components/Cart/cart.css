@@ -1,0 +1,32 @@
+.cartHeader{
+    color: white;
+}
+
+.sliderCart{
+    background-color: rgb(219, 211, 211);
+    color: white;
+    text-align: center;
+    padding: 10px;
+    box-shadow: 1px 0px 27px 2px #ff728b;
+    -webkit-box-shadow: 1px 0px 27px 2px #ff728b;
+    -moz-box-shadow: 1px 0px 27px 2px #ff728b;
+    margin-bottom:50px
+}
+
+.deleteCart{
+    float: right;
+    font-size:25px;
+    color:#ff728b;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: 300ms;
+}
+
+.deleteCart:hover{
+    color:#888;
+}
+
+.cart-empty{
+    text-align: center;
+}

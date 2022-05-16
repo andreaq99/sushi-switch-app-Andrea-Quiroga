@@ -1,11 +1,11 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [items, setItems] = useState([]);
-  //const [totalQuantity, setTotalQuantity] = useState(0);
-  //const [price, setPrice] = useState(0);
+  const [totalQuantity, setTotalQuantity] = useState(0);
+  const [price, setPrice] = useState(0);
   const [order, setOrder] = useState(null);
 
   const addToCart = (currentItem) => {
@@ -60,13 +60,13 @@ export const CartProvider = ({ children }) => {
   }
 
 
- /* useEffect(() => {
+ useEffect(() => {
 
     let totalCant = 0;
     let totalPrice = 0;
     for (let i = 0; i < items.length; i++) {
       let cant = items[i]?.currentItem.amount;
-      let price = items[i]?.currentItem.amount * items[i]?.currentItem.product.price;
+      let price = items[i]?.currentItem.amount * items[i]?.currentItem.price;
 
       totalPrice = totalPrice + price;
       totalCant = totalCant + cant;
@@ -75,7 +75,7 @@ export const CartProvider = ({ children }) => {
     setTotalQuantity(totalCant);
     setPrice(totalPrice);
 
-  }, [items])*/
+  }, [items])
 
 console.log(items)
   return (
@@ -86,6 +86,8 @@ console.log(items)
         clear,
         removeItem,
         orderNumber,
+        totalQuantity,
+        price,
         order
       }}
     >
