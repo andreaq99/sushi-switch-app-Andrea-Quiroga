@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import ItemDetail from '../ItemDetail/ItemDetail';
-import {getMock} from '../../data/products';
 import { CircularProgress } from '@mui/material';
 import { useParams } from 'react-router-dom';
+import { getItem as getMock } from '../../data/index';
 
 
 const ItemDetailContainer = () => {
@@ -11,9 +11,9 @@ const ItemDetailContainer = () => {
     const {itemid} = useParams();
 
     useEffect( () => {
-        getMock
+        getMock(itemid)
             .then(respuestaPromise => {
-                setItem(respuestaPromise.find( (item) => item.id === parseInt(itemid)) );
+                setItem(respuestaPromise);
             })
             .catch( (error) => console.log(error) )
             .finally( () => setLoading(false))

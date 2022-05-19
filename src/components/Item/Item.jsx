@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom'
 
 const Item = ({ product }) => {
     const [amount, setAmount] = useState(0);
-    const { stock, name, price, description, img } = product;
+    const { stock, name, price, description, imgUrl } = product;
 
     console.log(amount);
     return (
@@ -19,7 +19,7 @@ const Item = ({ product }) => {
                 <CardMedia
                     component="img"
                     height="120"
-                    image={img}
+                    image={imgUrl}
                     alt={name}
                 />
                 <CardContent>

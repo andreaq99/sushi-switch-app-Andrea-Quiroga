@@ -13,7 +13,7 @@ const products = [{
     stock: 20,
     price: 59.99,
     description: "Product description",
-    category: "Peripheral",
+    category: "D",
     img: teclado
 },
 

@@ -19,7 +19,7 @@ const ItemDetail = ({ item, idParam }) => {
         setAmount(0)
     }, [idParam])
 
-    const { name, price, stock, description, img } = item;
+    const { name, price, stock, description, imgUrl } = item;
 
     const handleAddToCart = () => {
         addToCart({...item, amount} )
@@ -38,7 +38,7 @@ const ItemDetail = ({ item, idParam }) => {
             <Grid container spacing={2}>
 
                 <Grid item xs={12} sm={8}>
-                    <Box><img className='productImg' src={img} alt={name} /></Box>
+                    <Box><img className='productImg' src={imgUrl} alt={name} /></Box>
                 </Grid>
 
                 <Grid item xs={12} sm={4}>

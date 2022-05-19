@@ -45,11 +45,11 @@ const Cart = () => {
                             {
 
                                 items?.map(item => {
-                                    const { id, name, price, stock, img } = item.currentItem
+                                    const { id, name, price, stock, imgUrl } = item.currentItem
                                     const handleRemoveItem = () => {
                                         removeItem(item.currentItem)
                                     }
-                                    return <CartItem key={id} removeItem={handleRemoveItem} id={id} pictureUrl={img} title={name} price={price} stock={stock} amount={item.currentItem.amount} />
+                                    return <CartItem key={id} removeItem={handleRemoveItem} id={id} pictureUrl={imgUrl} title={name} price={price} stock={stock} amount={item.currentItem.amount} />
                                 })
                             }
 
