@@ -6,10 +6,10 @@ import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import { CircularProgress, TextField } from '@mui/material';
 import { CartContext } from '../store/CartContext';
-import { addDoc, collection, doc, getFirestore, writeBatch } from 'firebase/firestore';
+import { writeBatch, collection, getFirestore, doc, Timestamp, addDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import { GrFormClose } from 'react-icons/gr';
-
+import firestoreDB from '../../data';
 
 const ModalCart = ({ total }) => {
 
@@ -30,7 +30,7 @@ const ModalCart = ({ total }) => {
     textAlign: 'center'
   };
 
-  const { items, clear, orderNumber } = useContext(CartContext);
+  const { items, clear, orderNumber, price } = useContext(CartContext);
   const [loading, setLoading] = useState(false)
 
   const [buyer, setBuyer] = useState({
@@ -68,37 +68,42 @@ const ModalCart = ({ total }) => {
     width: '100%',
   }
 
-  const sendOrder = () => {
+  console.log(items);
+  console.log(price);
 
-    let date = new Date();
-    const order = {
-      buyer,
-      items,
-      total,
-      date
+  const createBuyOrder = async (orderData) =>{
+
+    try{
+        const buyTimestamp = Timestamp.now();
+        const orderWithDate = {
+            ...orderData,
+            date : buyTimestamp
+        };
+        setLoading(true)
+        const myColec = collection (firestoreDB, "orders");
+        const orderDoc = await addDoc(myColec, orderWithDate);
+        setOrderId(orderDoc.id);
     }
+    catch(err){
+        console.log(err)
+    }
+    finally{
+      clear();
+      navigate('/success');
+    }
+}
 
+  function handleBuy() {
+
+    const buyOrder = {
+        buyer,
+        products: items,
+        total: price
+    };
     setLoading(true);
-
-    const db = getFirestore();
-
-    const ordersCollection = collection(db, "orders");
-
-    addDoc(ordersCollection, order)
-      .then(({ id }) => {
-        setOrderId(id);
-        handleClose();
-        clear();
-      })
-      .catch((err) => console.log(err))
-      .finally(() => {
-        setLoading(false);
-        navigate('/success');
-        updateItem();
-      })
-
-
-  }
+    createBuyOrder(buyOrder);
+    updateItem();
+}
 
   const updateItem = () => {
 
@@ -108,8 +113,8 @@ const ModalCart = ({ total }) => {
     items.forEach((item) => {
 
       const { amount } = item.currentItem;
-      const { stock, id } = item.currentItem.product;
-      const docRef = doc(db, "items", id);
+      const { stock, id } = item.currentItem;
+      const docRef = doc(db, "products", id);
 
       batch.update(docRef, { stock: stock - amount })
 
@@ -237,7 +242,7 @@ const ModalCart = ({ total }) => {
                 }
 
               }}
-                variant='outlined' onClick={sendOrder}
+                variant='outlined' onClick={handleBuy}
                 disabled={!buyer.phone || !buyer.email || !buyer.name || !(buyer.confirmEmail === buyer.email)}>
                 {loading ? <CircularProgress sx={{ color: '#ff728b', mt: '10px !important', width: '20px !important', height: '20px !important' }} /> : "CHECKOUT"}
               </Button>

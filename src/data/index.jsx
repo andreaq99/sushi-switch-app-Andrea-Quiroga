@@ -1,6 +1,8 @@
 
+import { async } from "@firebase/util";
 import { initializeApp } from "firebase/app";
-import { collection, getDoc, getDocs, getFirestore, query, where, doc } from "firebase/firestore";
+import { collection, getDoc, getDocs, getFirestore, query, where, doc, Timestamp, addDoc } from "firebase/firestore";
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyDRrZj2AMDfd485xs72U8Ybll3fJMHo1Q8",
@@ -58,3 +60,4 @@ export async function getAllItems() {
     
             return { ...productsSnap.data(), id: productsSnap.id };
         }
+

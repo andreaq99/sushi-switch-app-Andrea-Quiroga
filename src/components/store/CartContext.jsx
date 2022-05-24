@@ -6,7 +6,7 @@ export const CartProvider = ({ children }) => {
   const [items, setItems] = useState([]);
   const [totalQuantity, setTotalQuantity] = useState(0);
   const [price, setPrice] = useState(0);
-  const [order, setOrder] = useState(null);
+  const [order, setOrder] = useState(0);
 
   const addToCart = (currentItem) => {
 
@@ -77,7 +77,6 @@ export const CartProvider = ({ children }) => {
 
   }, [items])
 
-console.log(items)
   return (
     <CartContext.Provider
       value={{

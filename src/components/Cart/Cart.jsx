@@ -12,6 +12,7 @@ const Cart = () => {
 
     const { removeItem, items, clear, price } = useContext(CartContext);
 
+
     const stylesButton = {
         display: 'block',
         margin: '0 auto',
@@ -86,7 +87,7 @@ const Cart = () => {
 
                     </Grid>
 
-                </Container> : <h1 className="cart-empty">The Cart is empty! <Link style={{color: "pink"}} to='/product'>click here</Link> to see more products...</h1>}
+                </Container> : <h1 className="cart-empty">The Cart is empty! <Link style={{ color: "pink" }} to='/product'>click here</Link> to see more products...</h1>}
 
         </>
     );
